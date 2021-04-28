@@ -26,6 +26,14 @@ app.get('/posts', (req, res) => {
             const post = posts[postId];
             post.comments.push({ id, content, status });
             break;
+        case 'CommentUpdated':
+            const { id, content, postId, stauts } = data;
+
+            const post = posts[postId];
+            const comment = post.comments.find(comment => comment.id === id);
+            comment.status = status;
+            comment.content = content;
+            break;
         default:
             break;
     }
